@@ -48,7 +48,7 @@ module.exports = {
         });
 
 },
- checklogin:function(req, res, next) {
+checklogin:function(req, res, next) {
     var url = process.env.DB + 'heroku_szcw1h07';    
     var username = req.body.username;
     var password = req.body.password;
@@ -105,7 +105,7 @@ module.exports = {
     var password = req.body.password;
     MongoClient.connect(url, function (err, db){
         if(err) {return res.status(500).json({success:false,errmsg:err.errmsg,message:err.message});}
-            var queryGet = {userName: userName};
+            var queryGet = {userName: username};
                 var queryUpdate ={$set:{"password": password,"passwordReset":true}};
                 db.collection('Employee').findAndModify(queryGet,[['_id','asc']], queryUpdate,{},
                       function(error, result){
@@ -427,7 +427,7 @@ submitOfficeInfo:function(req, res, next) {
         {
            queryGetAcc={department:{$in:grade}}
         }
-        db.collection('kra').find(queryGetAcc).toArray(function(error, user){
+        db.collection('Employee').find(queryGetAcc).toArray(function(error, user){
             if(error)
             {
                 db.close();

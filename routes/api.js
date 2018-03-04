@@ -13,7 +13,7 @@ router.post('/addEmployee',authcheck, adn.addEmployee);
 // //login
 router.post('/checklogin',appauth, adn.checklogin);
 
-// //login
+//login
 router.post('/auth', token.auth);
 // //validateEmp
 
