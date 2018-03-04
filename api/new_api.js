@@ -48,7 +48,7 @@ module.exports = {
         });
 
 },
-checklogin:function(req, res, next) {
+login:function(req, res, next) {
     var url = process.env.DB + 'heroku_szcw1h07';    
     var username = req.body.username;
     var password = req.body.password;
@@ -695,7 +695,7 @@ submitOfficeInfo:function(req, res, next) {
         });
     });
  },
- forgot: function(req, res, next) {
+ forgetPassword: function(req, res, next) {
     //send email
     var url = process.env.DB + 'heroku_szcw1h07'; 
     var queryGetAcc = { empId: req.body.empId};
@@ -707,7 +707,7 @@ submitOfficeInfo:function(req, res, next) {
             queryGetAcc,
             [['_id','asc']],
             {$set:{
-                "reset": date.toString()
+                "passwordReset": date.toString()
             }},
             {}, //options
             function(error, result){
@@ -717,10 +717,10 @@ submitOfficeInfo:function(req, res, next) {
                    return res.status(500).json({success:false,errmsg:error.errmsg,message:error.message});
                 }
                 db.close();
-                var ToEmail=result.email.toLowerCase();
+                //var ToEmail=result.email;
                 var Subject='Reset Password Link';
                 var Body =`<strong>Hi,</strong><br><br>Adn recently received a request for a forgotten password. <br><br>To change your adn hrm password, Please click on this <a href="https://www.adn.org/reset/${date}">link</a><br><br>This link will expire in 10 minutes.<br><br>Thanks<br>Adn Support`
-                sendmail.sendmail(ToEmail,Subject,Body);
+                //sendmail.sendmail(ToEmail,Subject,Body);
                 return res.status(200).json({success:true,message:'Reset Email Link Send Successfully.',data:true});
             });
     

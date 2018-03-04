@@ -10,8 +10,8 @@ var token=require('../api/auth');
 
 router.post('/addEmployee',authcheck, adn.addEmployee);
 
-// //login
-router.post('/checklogin',appauth, adn.checklogin);
+
+router.post('/login',appauth, adn.login);
 
 //login
 router.post('/auth', token.auth);
@@ -66,7 +66,7 @@ router.get('/checkClarificationTable',authcheck, adn.checkClarificationTable);
 
 
 // //login
-router.get('/forgetPassword', adn.checklogin);
+router.post('/forgetPassword',appauth, adn.forgetPassword);
 
 //router.post('/sendmail', sendmail.sendmail);
 
